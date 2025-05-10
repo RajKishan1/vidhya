@@ -205,7 +205,7 @@ export async function POST(request: Request) {
     const { name, profileImg, userReview, linkedinUrl, starRating } =
       validateResult.data;
 
-    const saveTestimonial = await prisma.testimonial.create({
+    const saveTestimonial = await prisma.model_testimonial.create({
       data: {
         name,
         profileImg,
@@ -236,7 +236,7 @@ export async function POST(request: Request) {
 
 export async function GET() {
   try {
-    const allTestimonials = await prisma.testimonial.findMany({
+    const allTestimonials = await prisma.model_testimonial.findMany({
       orderBy: {
         name: "asc",
       },
@@ -280,7 +280,7 @@ export async function DELETE(request: Request) {
       });
     }
 
-    const existingTestimonial = await prisma.testimonial.findUnique({
+    const existingTestimonial = await prisma.model_testimonial.findUnique({
       where: { id },
     });
 
@@ -293,7 +293,7 @@ export async function DELETE(request: Request) {
         { status: 404 }
       );
     }
-    await prisma.testimonial.delete({
+    await prisma.model_testimonial.delete({
       where: { id },
     });
 
